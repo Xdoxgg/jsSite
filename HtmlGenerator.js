@@ -1,12 +1,14 @@
 class HtmlGenerator {
-    createTag(tagName, tagId) {
+    createTag(parentElement, tagName, tagId) {
         const search = document.getElementById(tagId);
         if (search) {
             throw 'element with tag "' + tagName + '" already exists.';
         } else {
             const element = document.createElement(tagName);
             element.id = tagId;
-            document.body.appendChild(element);
+            parentElement.appendChild(element);
+            return true;
+
         }
     }
 
@@ -17,6 +19,8 @@ class HtmlGenerator {
                 for (let i = 0; i < attributeNames.length; i++) {
                     element.setAttribute(attributeNames[i], attributeValues[i]);
                 }
+                return true;
+
             }
             else {
                 throw 'element with tag "' + tagId + '" not exists.';
@@ -29,7 +33,9 @@ class HtmlGenerator {
     setContent(tagId, content) {
         const element = document.getElementById(tagId);
         if (element) {
-            element.setContent(content);
+            element.textContent = content;
+            return true;
+
         }
         else {
             throw 'element with tag "' + tagId + '" not exists.';
@@ -38,7 +44,15 @@ class HtmlGenerator {
     }
 
     setEventListener(tagId, eventName, event) {
+        const element = document.getElementById(tagId);
+        if (element) {
+            element.setEventListener(tagId, eventName, event);
+            return true;
+        }
+        else {
+            throw 'element with tag "' + tagId + '" not exists.';
 
+        }
     }
 
 

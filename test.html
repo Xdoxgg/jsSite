@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TestDocument</title>
+</head>
+<body id="body">
+
+</body>
+
+<script src="HtmlGenerator.js">
+    document.addEventListener('DOMContentLoaded',function() {
+        let generator = new HtmlGenerator()
+        generator.createTag(document.getElementById('body'), 'div', 'tagid')
+        generator.setContent('tagid','content sosoadoddadadawdwadadw')
+
+    });
+
+</script>
+</html>
