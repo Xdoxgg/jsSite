@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TestDocument</title>
 </head>
+<script src="HtmlGenerator.js"></script> <!-- конект класса -->
 <body id="body">
+
 
 </body>
 
-<script src="HtmlGenerator.js">
-    document.addEventListener('DOMContentLoaded',function() {
-        let generator = new HtmlGenerator()
-        generator.createTag(document.getElementById('body'), 'div', 'tagid')
-        generator.setContent('tagid','content sosoadoddadadawdwadadw')
-
-    });
-
+<script>
+    HtmlGenerator.createTag(document.getElementById('body'), 'button', 'tagid') // work
+    HtmlGenerator.setContent('tagid', 'content sosoadoddadadawdwadadw') // work
+    HtmlGenerator.setAttribute('tagid', ['style'], ['background-color: red;']) // work
+    HtmlGenerator.setEventListener('tagid', 'onClick', function () {
+        alert('work')
+    })
 </script>
 </html>

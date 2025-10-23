@@ -1,5 +1,5 @@
 class HtmlGenerator {
-    createTag(parentElement, tagName, tagId) {
+    static createTag(parentElement, tagName, tagId) {
         const search = document.getElementById(tagId);
         if (search) {
             throw 'element with tag "' + tagName + '" already exists.';
@@ -12,7 +12,7 @@ class HtmlGenerator {
         }
     }
 
-    setAttribute(tagId, attributeNames, attributeValues) {
+    static setAttribute(tagId, attributeNames, attributeValues) {
         if (attributeNames.length === attributeValues.length) {
             const element = document.getElementById(tagId);
             if (element) {
@@ -30,7 +30,7 @@ class HtmlGenerator {
         }
     }
 
-    setContent(tagId, content) {
+    static setContent(tagId, content) {
         const element = document.getElementById(tagId);
         if (element) {
             element.textContent = content;
@@ -43,10 +43,10 @@ class HtmlGenerator {
         }
     }
 
-    setEventListener(tagId, eventName, event) {
+    static setEventListener(tagId, eventName, event) {
         const element = document.getElementById(tagId);
         if (element) {
-            element.setEventListener(tagId, eventName, event);
+            element.addEventListener(eventName, event);
             return true;
         }
         else {
