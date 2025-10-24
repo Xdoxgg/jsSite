@@ -15,8 +15,9 @@
     HtmlGenerator.createTag(document.getElementById('body'), 'button', 'tagid') // work
     HtmlGenerator.setContent('tagid', 'content sosoadoddadadawdwadadw') // work
     HtmlGenerator.setAttribute('tagid', ['style'], ['background-color: red;']) // work
-    HtmlGenerator.setEventListener('tagid', 'onClick', function () {
+    HtmlGenerator.setEventListener('tagid', 'click', function () { // work
         alert('work')
     })
+
 </script>
 </html>
