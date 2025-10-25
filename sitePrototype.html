@@ -79,7 +79,6 @@
 </div>
 
 <script>
-  // Пример данных пользователей с TODO и постами
   const users = [
     {
       id: 1,
@@ -129,7 +128,6 @@
   let selectedUser = null;
   let showingTodos = true;
 
-  // Функция отрисовки списка пользователей
   function renderUserList() {
     userListEl.innerHTML = '';
     filteredUsers.forEach(user => {
@@ -146,7 +144,6 @@
     });
   }
 
-  // Выбор пользователя
   function selectUser(userId) {
     selectedUser = users.find(u => u.id === userId);
     showingTodos = true;
@@ -156,7 +153,6 @@
     renderRightPanel();
   }
 
-  // Отрисовка правой части (TODO или посты)
   function renderRightPanel() {
     if (!selectedUser) {
       rightPanelTitle.textContent = 'Выберите пользователя';
@@ -174,7 +170,6 @@
     }
   }
 
-  // Отрисовка списка задач или постов
   function renderItems(items) {
     itemListEl.innerHTML = '';
     if (!items || items.length === 0) {
@@ -188,11 +183,9 @@
     });
   }
 
-  // Фильтрация пользователей по вводу
   filterInput.addEventListener('input', () => {
     const filterText = filterInput.value.toLowerCase();
     filteredUsers = users.filter(u => u.name.toLowerCase().includes(filterText));
-    // Если выбранный пользователь не попадает под фильтр — сброс выбора
     if (selectedUser && !filteredUsers.some(u => u.id === selectedUser.id)) {
       selectedUser = null;
       toggleBtn.disabled = true;
@@ -202,7 +195,6 @@
     renderUserList();
   });
 
-  // Переключение TODO / Посты
   toggleBtn.addEventListener('click', () => {
     if (!selectedUser) return;
     showingTodos = !showingTodos;
@@ -210,7 +202,6 @@
     renderRightPanel();
   });
 
-  // Инициализация
   renderUserList();
   renderRightPanel();
 
