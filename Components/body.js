@@ -1,5 +1,5 @@
-function generateBody(parentElement) {
-    //левая панель, Мишаня тут будут юзеры, атрибуты нужно будет доделать
+async function generateBody(parentElement) {
+    // левая панель
     HtmlGenerator.createTag(parentElement, 'div', 'leftPanel');
     HtmlGenerator.setAttribute('leftPanel', ['class'], ['left-panel']);
     HtmlGenerator.createTag(document.getElementById('leftPanel'), 'input', 'filterInput');
@@ -11,15 +11,31 @@ function generateBody(parentElement) {
     HtmlGenerator.setContent('toggleBtn', 'Показать посты');
     document.getElementById('toggleBtn').disabled = true;
 
-    //правая панель
+    // правая панель
     HtmlGenerator.createTag(parentElement, 'div', 'rightPanel');
     HtmlGenerator.setAttribute('rightPanel', ['class'], ['right-panel']);
     HtmlGenerator.createTag(document.getElementById('rightPanel'), 'h2', 'rightTitle');
     HtmlGenerator.setContent('rightTitle', 'Выберите пользователя');
-
-    // тут в ul будут либо todo либо посты 
     HtmlGenerator.createTag(document.getElementById('rightPanel'), 'ul', 'itemList');
     HtmlGenerator.setAttribute('itemList', ['class'], ['item-list']);
+
+    // Получаем пользователей и заполняем список
+    try {
+        const users = await getUser();
+        users.forEach(user => {
+            const liId = 'user-' + user.id;
+            HtmlGenerator.createTag(document.getElementById('userList'), 'li', liId);
+
+            const userInfo =
+                `Имя: ${user.name}
+Username: ${user.username}
+Email: ${user.email}
+Телефон: ${user.phone}`;
+
+            HtmlGenerator.setContent(liId, userInfo);
+            HtmlGenerator.setAttribute(liId, ['data-user-id'], [user.id]);
+        });
+    } catch (error) {
+        console.error('Ошибка при загрузке пользователей:', error);
+    }
 }
-
-
