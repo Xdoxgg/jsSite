@@ -9,10 +9,8 @@ async function getAllPostsWithComments() {
         comments.forEach(comment => {
             if(comment.postId == post.id) {}
             post.comments.push(comment);
-            // console.log(comment)
         })
     })
     return posts;
 }
-
 

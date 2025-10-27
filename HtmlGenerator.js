@@ -21,8 +21,7 @@ class HtmlGenerator {
                 }
                 return true;
 
-            }
-            else {
+            } else {
                 throw 'element with tag "' + tagId + '" not exists.';
             }
         } else {
@@ -36,8 +35,7 @@ class HtmlGenerator {
             element.textContent = content;
             return true;
 
-        }
-        else {
+        } else {
             throw 'element with tag "' + tagId + '" not exists.';
 
         }
@@ -48,12 +46,9 @@ class HtmlGenerator {
         if (element) {
             element.addEventListener(eventName, event);
             return true;
-        }
-        else {
+        } else {
             throw 'element with tag "' + tagId + '" not exists.';
 
         }
     }
-
-
 }
