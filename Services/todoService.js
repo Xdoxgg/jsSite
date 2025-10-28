@@ -4,11 +4,13 @@ async function getTodoByUserId(id) {
     let result = [];
     data.forEach(e => {
         if (e.userId == id) {
-            result.push(e)
+            const status = e.completed ? '✓' : '✗';
+            result.push(`${status} ${e.title}`);
         }
-    })
+    });
     return result;
 }
+
 
 
 async function getAllTodos() {

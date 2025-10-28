@@ -20,15 +20,16 @@ let selectedUserId = null;
     let showingTodos = true;
     let currentPosts = []; 
 
-    async function loadAndRenderTodos(userId) {
-        try {
-            const todos = await getTodoByUserId(userId);
-            renderItems(todos, 'TODO список');
-            clearComments();
-        } catch (e) {
-            console.error('Ошибка загрузки TODO:', e);
-        }
+async function loadAndRenderTodos(userId) {
+    try {
+        const todos = await getTodoByUserId(userId);
+        renderItems(todos, 'TODO список');
+        clearComments();
+    } catch (e) {
+        console.error('Ошибка загрузки TODO:', e);
     }
+}
+
 
     async function loadAndRenderPosts(userId) {
         try {
