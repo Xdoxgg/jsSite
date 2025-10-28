@@ -1,32 +1,26 @@
 const routes = {
     '#users': 'Пользователи',
-    '#users/todos': '',
-    '#users/posts': 'Раздел 2',
+    '#users/todos': 'Todos',
+    '#users/posts': 'Посты',
 };
 
-function updateBreadcrumbs() {
+function updateBreadcrumbs(path) {
     const breadcrumbsContainer = document.getElementById('breadcrumbs');
-    const hash = window.location.hash || '';
 
     // Разбиваем путь на части по "/"
-    const parts = hash.split('/').filter(Boolean);
+    const parts = path.split('/').filter(Boolean);
 
-    let path = '';
+    let accumulatedPath = '';
     const crumbs = [];
 
-    // Добавляем "Главная" всегда в начало
-    crumbs.push(`<a href="#">${routes['']}</a>`);
+    // Добавляем "Главная" в начало
+    crumbs.push(`<a href="#" data-route="">Главная</a>`);
 
     parts.forEach((part, index) => {
-        path += (index === 0 ? '#' : '/') + part;
-        const name = routes[path] || part;
-        crumbs.push(`<a href="${path}">${name}</a>`);
+        accumulatedPath += (index === 0 ? '#' : '/') + part;
+        const name = routes[accumulatedPath] || part;
+        crumbs.push(`<a href="#" data-route="${accumulatedPath}">${name}</a>`);
     });
 
-    // Отобразить хлебные крошки через " > "
     breadcrumbsContainer.innerHTML = crumbs.join(' &gt; ');
 }
-
-// Обновлять хлебные крошки при загрузке и при изменении хэша
-window.addEventListener('hashchange', updateBreadcrumbs);
-window.addEventListener('load', updateBreadcrumbs);

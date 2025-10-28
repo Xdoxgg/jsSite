@@ -1,5 +1,5 @@
 async function getTodoByUserId(id) {
-    let response = await fetch("https://jsonplaceholder.typicode.com/todos ");
+    let response = await fetch("https://jsonplaceholder.typicode.com/todos");
     const data = await response.json();
     let result = [];
     data.forEach(e => {
