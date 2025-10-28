@@ -1,3 +1,4 @@
+
 class HtmlGenerator {
     static createTag(parentElement, tagName, tagId) {
         const search = document.getElementById(tagId);
