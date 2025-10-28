@@ -4,7 +4,7 @@ async function getTodoByUserId(id) {
     let result = [];
     data.forEach(e => {
         if (e.userId == id) {
-            result.push(e.email)
+            result.push(e)
         }
     })
     return result;
