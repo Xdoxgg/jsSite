@@ -1,4 +1,3 @@
-
 async function getAllPostsWithComments() {
     let response = await fetch("https://jsonplaceholder.typicode.com/posts");
     let posts = await response.json();
@@ -7,8 +6,10 @@ async function getAllPostsWithComments() {
     posts.forEach(post => {
         post.comments = []
         comments.forEach(comment => {
-            if(comment.postId == post.id) {}
-            post.comments.push(comment);
+            if (comment.postId == post.id) {
+                post.comments.push(comment);
+            }
+
         })
     })
     return posts;
