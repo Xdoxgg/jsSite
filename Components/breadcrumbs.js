@@ -1,26 +1,22 @@
 const routes = {
+    '': 'Главная',
     '#users': 'Пользователи',
     '#users/todos': 'Todos',
     '#users/posts': 'Посты',
 };
 
-function updateBreadcrumbs(path) {
-    const breadcrumbsContainer = document.getElementById('breadcrumbs');
-
-    // Разбиваем путь на части по "/"
-    const parts = path.split('/').filter(Boolean);
-
-    let accumulatedPath = '';
-    const crumbs = [];
-
-    // Добавляем "Главная" в начало
-    crumbs.push(`<a href="#" data-route="">Главная</a>`);
-
-    parts.forEach((part, index) => {
-        accumulatedPath += (index === 0 ? '#' : '/') + part;
-        const name = routes[accumulatedPath] || part;
-        crumbs.push(`<a href="#" data-route="${accumulatedPath}">${name}</a>`);
+// Функция для реакции на изменение адресной строки (хэша)
+function onAddressChange(callback) {
+    window.addEventListener('hashchange', () => {
+        callback(window.location.hash);
     });
+}
 
-    breadcrumbsContainer.innerHTML = crumbs.join(' &gt; ');
+// Функция для изменения адресной строки (хэша)
+function changeAddress(newHash) {
+    if (newHash.startsWith('#')) {
+        window.location.hash = newHash;
+    } else {
+        window.location.hash = '#' + newHash;
+    }
 }

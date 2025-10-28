@@ -144,6 +144,7 @@ let selectedUserId = null;
         toggleBtn.textContent = 'Показать посты';
 
         loadAndRenderTodos(selectedUserId);
+        
     }
 
     const userList = document.getElementById('userList');
