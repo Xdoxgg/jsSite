@@ -1,18 +1,21 @@
-const routes = {
-    '': 'Главная',
-    '#users': 'Пользователи',
-    '#users/todos': 'Todos',
-    '#users/posts': 'Посты',
-};
 
-// Функция для реакции на изменение адресной строки (хэша)
-function onAddressChange(callback) {
+async function onAddressChange() {
     window.addEventListener('hashchange', () => {
-        callback(window.location.hash);
+        switch (window.location.hash) {
+            case '#users/todos':
+                alert(window.location.hash)
+                
+                callbackUsersTodos()
+                break;
+            case '#users/posts':
+                alert(window.location.hash)
+                
+                callbackUsersPosts()
+                break;
+
+        }
     });
 }
-
-// Функция для изменения адресной строки (хэша)
 function changeAddress(newHash) {
     if (newHash.startsWith('#')) {
         window.location.hash = newHash;
@@ -20,3 +23,12 @@ function changeAddress(newHash) {
         window.location.hash = '#' + newHash;
     }
 }
+
+async function callbackUsersTodos() {
+    await loadAndRenderTodos(1)
+}
+
+async function callbackUsersPosts() {
+    await loadAndRenderPosts(1)
+}
+
