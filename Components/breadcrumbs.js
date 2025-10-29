@@ -1,13 +1,15 @@
 
 async function onAddressChange() {
     window.addEventListener('hashchange', () => {
+        alert(window.location.hash)
+        
         switch (window.location.hash) {
-            case '#users/todos':
-                alert(window.location.hash)
-                
+            case '#todos':
                 callbackUsersTodos()
+                
+               
                 break;
-            case '#users/posts':
+            case '#posts':
                 alert(window.location.hash)
                 
                 callbackUsersPosts()
@@ -24,11 +26,11 @@ function changeAddress(newHash) {
     }
 }
 
-async function callbackUsersTodos() {
-    await loadAndRenderTodos(1)
+async function callbackUsersTodos(userId) {
+    await loadAndRenderTodos(userId)
 }
 
-async function callbackUsersPosts() {
-    await loadAndRenderPosts(1)
+async function callbackUsersPosts(userId) {
+    await loadAndRenderPosts(userId)
 }
 
