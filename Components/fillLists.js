@@ -3,7 +3,7 @@ async function renderPosts(posts) {
     const rightTitle = document.getElementById('rightTitle');
 
     let user =await getUser(selectedUserId)
-    rightTitle.textContent = selectedUserId ? `Посты пользователя ${user.name}` : 'Выберите пользователя';
+    rightTitle.textContent = selectedUserId ? `Посты пользователя ${user.username}` : 'Выберите пользователя';
 
     itemList.innerHTML = '';
     if (!posts || posts.length === 0) {
@@ -42,11 +42,12 @@ async function loadAndRenderPosts(userId) {
     }
 }
 
-function renderItems(items, titlePrefix) {
+async function renderItems(items, titlePrefix) {
     const itemList = document.getElementById('itemList');
     const rightTitle = document.getElementById('rightTitle');
 
-    rightTitle.textContent = selectedUserId ? `${titlePrefix} пользователя ${selectedUserId}` : 'Выберите пользователя';
+    let user = await getUser(selectedUserId)
+    rightTitle.textContent = selectedUserId ? `${titlePrefix} пользователя ${user.username}` : 'Выберите пользователя';
 
     itemList.innerHTML = '';
     if (!items || items.length === 0) {
