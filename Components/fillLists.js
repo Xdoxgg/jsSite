@@ -2,7 +2,8 @@ async function renderPosts(posts) {
     const itemList = document.getElementById('itemList');
     const rightTitle = document.getElementById('rightTitle');
 
-    rightTitle.textContent = selectedUserId ? `Посты пользователя ${await getUser(selectedUserId)}` : 'Выберите пользователя';
+    let user =await getUser(selectedUserId)
+    rightTitle.textContent = selectedUserId ? `Посты пользователя ${user.name}` : 'Выберите пользователя';
 
     itemList.innerHTML = '';
     if (!posts || posts.length === 0) {

@@ -3,7 +3,7 @@ async function getUser(userId = null) {
     const data = await response.json();
     if (userId !== null) {
         for (let i =0; i<data.length; i++) {
-            if (data[i].id === userId) {
+            if (data[i].id == userId) {
                 return data[i];
             }
         }
