@@ -22,10 +22,12 @@ async function renderPosts(posts) {
 }
 
 async function loadAndRenderTodos(userId) {
+    
     try {
         const todos = await getTodoByUserId(userId);
         renderItems(todos, 'TODO список');
         clearComments();
+        changeAddress(`#user${userId}#todos`)
     } catch (e) {
         console.error('Ошибка загрузки TODO:', e);
     }
@@ -37,6 +39,7 @@ async function loadAndRenderPosts(userId) {
         currentPosts = posts.filter(post => post.userId == userId);
         await renderPosts(currentPosts);
         clearComments();
+        changeAddress(`#user${userId}#posts`)
     } catch (e) {
         console.error('Ошибка загрузки постов:', e);
     }
