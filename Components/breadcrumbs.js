@@ -1,18 +1,18 @@
 
 async function onAddressChange() {
     window.addEventListener('hashchange', () => {
-        alert(window.location.hash)
-        
-        switch (window.location.hash) {
+        let str = window.location.hash;
+        let userNumberMatch = str.match(/#user(\d+)#/);
+        let userNumber = userNumberMatch ? userNumberMatch[1] : null;
+        let newStr = str.replace(/#user\d+#/, '');
+        switch (newStr) {
             case '#todos':
-                callbackUsersTodos()
+                callbackUsersTodos(userNumber)
                 
-               
                 break;
             case '#posts':
-                alert(window.location.hash)
                 
-                callbackUsersPosts()
+                callbackUsersPosts(userNumber)
                 break;
 
         }
@@ -27,10 +27,12 @@ function changeAddress(newHash) {
 }
 
 async function callbackUsersTodos(userId) {
+    alert(userId);
     await loadAndRenderTodos(userId)
 }
 
 async function callbackUsersPosts(userId) {
+    alert(userId);
     await loadAndRenderPosts(userId)
 }
 
