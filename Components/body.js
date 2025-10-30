@@ -38,58 +38,58 @@ async function generateBody(parentElement) {
 
     try {
         const users = await getUser();
-users.forEach(user => {
-    const liId = 'user-' + user.id;
-    HtmlGenerator.createTag(document.getElementById('userList'), 'li', liId);
-    HtmlGenerator.setAttribute(liId, ['data-user-id'], [user.id]);
+        users.forEach(user => {
+            const liId = 'user-' + user.id;
+            HtmlGenerator.createTag(document.getElementById('userList'), 'li', liId);
+            HtmlGenerator.setAttribute(liId, ['data-user-id'], [user.id]);
 
-    const liElement = document.getElementById(liId);
-    liElement.innerHTML = '';
+            const liElement = document.getElementById(liId);
+            liElement.innerHTML = '';
 
-    const fields = [
-        { label: 'Имя', value: user.name },
-        { label: 'Username', value: user.username },
-        { label: 'Email', value: user.email },
-        { label: 'Телефон', value: user.phone }
-    ];
+            const fields = [{label: 'Имя', value: user.name}, {
+                label: 'Username',
+                value: user.username
+            }, {label: 'Email', value: user.email}, {label: 'Телефон', value: user.phone}];
 
-    fields.forEach(field => {
-        const div = document.createElement('div');
-        div.textContent = `${field.label}: ${field.value}`;
-        liElement.appendChild(div);
-    });
-
-    liElement.addEventListener('click', onUserClick);
-});
+            fields.forEach(field => {
+                const div = document.createElement('div');
+                div.className='none-class'
+                div.textContent = `${field.label}: ${field.value}`;
+                liElement.appendChild(div);
+            });
+ 
+            HtmlGenerator.setEventListener(liId, 'click', onUserClick)
+           
+        });
 
     } catch (error) {
         console.error('Ошибка при загрузке пользователей:', error);
     }
 
     const filterInput = document.getElementById('filterInput');
-const userList = document.getElementById('userList');
+    const userList = document.getElementById('userList');
 
-filterInput.addEventListener('input', () => {
-    const filterText = filterInput.value.toLowerCase();
+    filterInput.addEventListener('input', () => {
+        const filterText = filterInput.value.toLowerCase();
 
-    Array.from(userList.children).forEach(li => {
-        const text = li.textContent.toLowerCase();
-        if (text.includes(filterText)) {
-            li.style.display = '';
-        } else {
-            li.style.display = 'none';
+        Array.from(userList.children).forEach(li => {
+            const text = li.textContent.toLowerCase();
+            if (text.includes(filterText)) {
+                li.style.display = '';
+            } else {
+                li.style.display = 'none';
+            }
+        });
+
+        if (selectedUserId) {
+            const selectedLi = document.querySelector(`#userList li[data-user-id="${selectedUserId}"]`);
+            if (selectedLi && selectedLi.style.display === 'none') {
+                selectedUserId = null;
+                document.getElementById('toggleBtn').disabled = true;
+                document.getElementById('rightTitle').textContent = 'Выберите пользователя';
+                document.getElementById('itemList').innerHTML = '';
+            }
         }
     });
-
-    if (selectedUserId) {
-        const selectedLi = document.querySelector(`#userList li[data-user-id="${selectedUserId}"]`);
-        if (selectedLi && selectedLi.style.display === 'none') {
-            selectedUserId = null;
-            document.getElementById('toggleBtn').disabled = true;
-            document.getElementById('rightTitle').textContent = 'Выберите пользователя';
-            document.getElementById('itemList').innerHTML = '';
-        }
-    }
-});
 
 }

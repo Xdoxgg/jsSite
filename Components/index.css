@@ -56,3 +56,6 @@
     padding: 6px 8px;
     border-bottom: 1px solid #ddd;
   }
+  .none-class{
+      pointer-events: none;
+  }
