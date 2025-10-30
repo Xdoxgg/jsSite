@@ -1,8 +1,8 @@
-function renderPosts(posts) {
+async function renderPosts(posts) {
     const itemList = document.getElementById('itemList');
     const rightTitle = document.getElementById('rightTitle');
 
-    rightTitle.textContent = selectedUserId ? `Посты пользователя ${selectedUserId}` : 'Выберите пользователя';
+    rightTitle.textContent = selectedUserId ? `Посты пользователя ${await getUser(selectedUserId)}` : 'Выберите пользователя';
 
     itemList.innerHTML = '';
     if (!posts || posts.length === 0) {
@@ -34,7 +34,7 @@ async function loadAndRenderPosts(userId) {
     try {
         const posts = await getAllPostsWithComments();
         currentPosts = posts.filter(post => post.userId == userId);
-        renderPosts(currentPosts);
+        await renderPosts(currentPosts);
         clearComments();
     } catch (e) {
         console.error('Ошибка загрузки постов:', e);
